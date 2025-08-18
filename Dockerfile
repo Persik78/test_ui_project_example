@@ -23,13 +23,13 @@ RUN wget https://storage.googleapis.com/chrome-for-testing-public/${CHROME_VERSI
     && rm chromedriver-linux64.zip \
     && ln -sf /opt/chromedriver/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
 
-# JDK 17
+# JDK 17 (с фиксированным JAVA_HOME)
 RUN mkdir -p /opt/java && \
     curl -fsSL https://api.adoptium.net/v3/binary/latest/17/ga/linux/x64/jdk/hotspot/normal/eclipse -o /tmp/openjdk17.tar.gz && \
-    tar -xzf /tmp/openjdk17.tar.gz -C /opt/java && \
+    tar -xzf /tmp/openjdk17.tar.gz -C /opt/java --strip-components=1 && \
     rm /tmp/openjdk17.tar.gz
 ENV JAVA_HOME=/opt/java
-ENV PATH="${JAVA_HOME}/*/bin:${PATH}"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 # Allure
 RUN curl -o allure-2.34.1.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.34.1/allure-commandline-2.34.1.tgz && \
