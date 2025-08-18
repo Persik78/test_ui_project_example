@@ -38,6 +38,5 @@ RUN curl -o allure-2.34.1.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta
     rm allure-2.34.1.tgz
 
 WORKDIR /app
-RUN mkdir -p allure_results
 COPY . .
 RUN pip install -r requirements.txt

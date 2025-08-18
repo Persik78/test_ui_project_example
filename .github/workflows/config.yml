@@ -24,6 +24,9 @@ jobs:
         run: |
           docker-compose up --build --exit-code-from example_ui || true
 
+      - name: Prepare allure-results dir
+        run: mkdir -p allure-results/history
+
       - name: Copy history from gh-pages to allure_results
         run: |
           mkdir -p allure_results/history
