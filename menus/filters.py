@@ -71,7 +71,7 @@ class Filters(Base):
     def select_apply_filters(self):
         Logger.add_start_step(method='select_apply_filters')
         self.click_apply_filters()
-        time.sleep(3) # URL не успевает измениться
+        time.sleep(5) # URL не успевает измениться
         self.get_current_url()
         self.assert_url('https://www.citilink.ru/catalog/processory/?ref=mainmenu&pf=rating.any%2Cdiscount.any&f=rating.any%2Cdiscount.any%2Camd%2C156_26ryzend17%2C157_26am5%2C24524_26amdd1ryzend17xxx')
         Logger.add_end_step(url=self.driver.current_url, method='select_apply_filters')
