@@ -3,5 +3,4 @@
 .venv
 *.iml
 .env
-logs
 allure_results
