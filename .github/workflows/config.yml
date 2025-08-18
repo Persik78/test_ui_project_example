@@ -24,10 +24,10 @@ jobs:
         run: |
           docker-compose up --build --exit-code-from example_ui || true
 
-      - name: Copy history from gh-pages to allure-results
+      - name: Copy history from gh-pages to allure_results
         run: |
-          mkdir -p allure-results/history
-          cp -R ./.github/gh-pages/history/* allure-results/history/ || true
+          mkdir -p allure_results/history
+          cp -R ./.github/gh-pages/history/* allure_results/history/ || true
 
       - name: Generate Allure report
         run: |
