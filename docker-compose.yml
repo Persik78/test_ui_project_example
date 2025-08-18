@@ -1,0 +1,10 @@
+services:
+  example_ui:
+    image: python:3.13
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/app
+    command: pytest -s -v tests/test_buy.py --alluredir=allure_results/tests/test_buy
+    working_dir: /app
