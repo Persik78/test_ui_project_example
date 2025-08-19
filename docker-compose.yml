@@ -1,12 +1,12 @@
 services:
   example_ui:
+    image: python:3.13
     build:
       context: .
       dockerfile: Dockerfile
-    image: example_ui:latest
     volumes:
+      - ./:/app
       - ./logs:/app/logs
       - ./screenshots:/app/screenshots
-      - ./allure_results:/app/allure_results
-    working_dir: /app
     command: pytest -s -v tests/test_buy.py --alluredir=allure_results
+    working_dir: /app
