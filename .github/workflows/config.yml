@@ -28,11 +28,11 @@ jobs:
       - name: Copy logs and screenshots from container
         run: |
           CONTAINER_ID=$(docker ps -aqf "name=example_ui")
-          mkdir -p logs screenshots
+          mkdir -p logs screenshots allure_results
           docker cp $CONTAINER_ID:/app/logs ./logs || true
           docker cp $CONTAINER_ID:/app/screenshots ./screenshots || true
           docker cp $CONTAINER_ID:/app/allure-results ./allure_results || true
-          sudo chown -R $USER:$USER allure_results || true
+          sudo chown -R $USER:$USER logs screenshots allure_results || true
 
       - name: Upload logs
         if: always()
@@ -53,9 +53,13 @@ jobs:
           mkdir -p allure_results/history
           cp -R ./.github/gh-pages/history/* allure_results/history/ || true
 
-      - name: Generate Allure report
+      - name: Generate Allure report inside container
         run: |
-          allure generate allure_results --clean -o allure-report
+          docker run --rm \
+            -v ${{ github.workspace }}/allure_results:/app/allure-results \
+            -v ${{ github.workspace }}/allure-report:/app/allure-report \
+            your_docker_image_with_allure \
+            allure generate /app/allure-results --clean -o /app/allure-report
 
       - name: Update Allure history
         run: |
