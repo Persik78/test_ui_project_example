@@ -15,8 +15,8 @@ service = Service("/opt/chromedriver/chromedriver-linux64/chromedriver")
 
 @pytest.fixture(autouse=True, scope="function")
 def set_up():
-    print('Start Test', datetime.datetime.now())
+    print('\nStart Test', datetime.datetime.now())
     driver = webdriver.Chrome(options=chrome_options, service=service)  # options=chrome_options, service=service
     yield driver
     driver.quit()
-    print('Final Test', datetime.datetime.now())
+    print('\nFinal Test', datetime.datetime.now())

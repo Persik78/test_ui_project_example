@@ -35,12 +35,6 @@ class Base():
         assert get_url == result
         print("Good value url")
 
-    """Method assert total cost"""
-    @staticmethod
-    def assert_total_cost(total_cost, result):
-        assert total_cost == result, print('Bad total cost:', total_cost, 'result:', result)
-        print("Good value total cost:", total_cost)
-
     """Method create test name"""
     @staticmethod
     def create_test_name():

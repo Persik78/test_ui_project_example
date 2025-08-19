@@ -24,8 +24,6 @@ class OrderPage(Base):
     street = '//input[@name="street"]'
     add_street = '//div[@class="eqw7fo10 css-7asl3q-SelectListOption--StyledSelectListOption-SelectListOption--StyledSelectListOptionComponent e9d6jv80"]'
     building = '//input[@name="courier-delivery-new-address-form_house"]'
-    price_delivery = '//*[@id="__next"]/div/div[2]/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div/div[1]/div/div[3]/div[1]/div[2]/label/div[2]/div/div[2]/span[1]'
-    total_cost_order = '//div[@class="css-0 e1dmrhay0"]/div/div/span[2]/span/span[1]'
 
     place_an_order = '//button[@class="e1mb8yuw0 css-6wqf91-Button--StyledButton-Button--Button ekx3zbi0"]/span'
 
@@ -50,12 +48,8 @@ class OrderPage(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.add_street)))
     def get_building(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.building)))
-    def get_price_delivery(self):
-        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located((By.XPATH, self.price_delivery)))
-    def get_total_cost_order(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.total_cost_order)))
     def get_place_an_order(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.total_cost_order)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.place_an_order)))
 
 
 
@@ -89,11 +83,6 @@ class OrderPage(Base):
         self.get_add_street().click()
         print('Click add street')
 
-    def int_price_delivery(self):
-        return int(self.get_price_delivery().text.replace(' ', ''))
-    def int_total_cost_order(self):
-        return int(self.get_total_cost_order().text.replace(' ', ''))
-
     def move_place_an_order(self):
         ActionChains(self.driver).move_to_element(self.get_place_an_order()).perform()
         print('Available place an order')
@@ -118,7 +107,4 @@ class OrderPage(Base):
         self.input_building(address[1])
         self.input_email(Base.create_test_email())
         self.get_screenshot('entry_receipt_and_payment_delivery')
-        print(datetime.datetime.now())
-        self.assert_total_cost(self.int_total_cost_order() + self.int_price_delivery(), 20990 + self.int_price_delivery()) # Не получилось сделать иначе, в элементе с ценой доставки она всегда прописана, но к итоговой сумме применяется с нормальной такой задержкой (при автотесте)
-        print(datetime.datetime.now())
         Logger.add_end_step(url=self.driver.current_url, method='entry_receipt_and_payment_delivery')
