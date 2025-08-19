@@ -27,6 +27,9 @@ jobs:
       - name: Prepare allure-results dir
         run: mkdir -p allure-results/history
 
+      - name: Fix permissions for allure_results
+        run: sudo chown -R $USER:$USER allure_results || true
+
       - name: Copy history from gh-pages to allure_results
         run: |
           mkdir -p allure_results/history
