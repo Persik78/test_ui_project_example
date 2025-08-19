@@ -1,1 +1,1 @@
-[{"uid":"dd1f26dc640a201f","name":"test_buy_processor_amd_ryzen_7_7700","time":{"start":1755585471156,"stop":1755585507939,"duration":36783},"status":"passed","severity":"normal"}]
+[{"uid":"ad864f0ec774ef29","name":"test_buy_processor_amd_ryzen_7_7700","time":{"start":1755586556030,"stop":1755586656158,"duration":100128},"status":"broken","severity":"normal"}]
