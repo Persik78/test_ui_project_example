@@ -23,7 +23,7 @@ class OrderPage(Base):
     street = '//input[@name="street"]'
     add_street = '//div[@class="eqw7fo10 css-7asl3q-SelectListOption--StyledSelectListOption-SelectListOption--StyledSelectListOptionComponent e9d6jv80"]'
     building = '//input[@name="courier-delivery-new-address-form_house"]'
-    price_delivery = '//div[@class="css-0 ex4wwky0"]/span[1]'
+    price_delivery = '//*[@id="__next"]/div/div[2]/div/div/div[1]/div/div[1]/div[3]/div/div/div[2]/div/div[1]/div/div[3]/div[1]/div[2]/label/div[2]/div/div[2]/span[1]'
     total_cost_order = '//div[@class="css-0 e1dmrhay0"]/div/div/span[2]/span/span[1]'
 
     place_an_order = '//button[@class="e1mb8yuw0 css-6wqf91-Button--StyledButton-Button--Button ekx3zbi0"]/span'
@@ -50,7 +50,7 @@ class OrderPage(Base):
     def get_building(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.building)))
     def get_price_delivery(self):
-        return self.driver.find_element(By.XPATH, self.price_delivery)
+        return WebDriverWait(self.driver, 360).until(EC.presence_of_element_located((By.XPATH, self.price_delivery)))
     def get_total_cost_order(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.total_cost_order)))
     def get_place_an_order(self):
