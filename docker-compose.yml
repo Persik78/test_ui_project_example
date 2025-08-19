@@ -6,5 +6,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./:/app
+      - ./logs:/app/logs
+      - ./screenshots:/app/screenshots
     command: pytest -s -v tests/test_buy.py --alluredir=allure_results
     working_dir: /app

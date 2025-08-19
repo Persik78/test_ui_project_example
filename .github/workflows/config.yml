@@ -24,6 +24,27 @@ jobs:
         run: |
           docker-compose up --build --exit-code-from example_ui || true
 
+      - name: Copy logs and screenshots from container
+        run: |
+          CONTAINER_ID=$(docker ps -aqf "name=example_ui")
+          mkdir -p logs screenshots
+          docker cp $CONTAINER_ID:/app/logs ./logs || true
+          docker cp $CONTAINER_ID:/app/screenshots ./screenshots || true
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          path: logs/
+
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots/
+
       - name: Prepare allure-results dir
         run: mkdir -p allure-results/history
 
