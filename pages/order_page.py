@@ -50,7 +50,7 @@ class OrderPage(Base):
     def get_building(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.building)))
     def get_price_delivery(self):
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, self.price_delivery)))
+        return WebDriverWait(self.driver, 120).until(EC.presence_of_element_located((By.XPATH, self.price_delivery)))
     def get_total_cost_order(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.total_cost_order)))
     def get_place_an_order(self):
@@ -117,6 +117,5 @@ class OrderPage(Base):
         self.input_building(address[1])
         self.input_email(Base.create_test_email())
         self.get_screenshot('entry_receipt_and_payment_delivery')
-        time.sleep(30)
         self.assert_total_cost(self.int_total_cost_order() + self.int_price_delivery(), 20990 + self.int_price_delivery()) # Не получилось сделать иначе, в элементе с ценой доставки она всегда прописана, но к итоговой сумме применяется с нормальной такой задержкой (при автотесте)
         Logger.add_end_step(url=self.driver.current_url, method='entry_receipt_and_payment_delivery')
