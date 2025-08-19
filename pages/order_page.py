@@ -50,7 +50,7 @@ class OrderPage(Base):
     def get_building(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.building)))
     def get_price_delivery(self):
-        return WebDriverWait(self.driver, 360).until(EC.presence_of_element_located((By.XPATH, self.price_delivery)))
+        return WebDriverWait(self.driver, 1200).until(EC.presence_of_element_located((By.XPATH, self.price_delivery)))
     def get_total_cost_order(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.total_cost_order)))
     def get_place_an_order(self):
