@@ -1,2 +1,2 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"test buy processor amd ryzen 7 7700","41506","test_buy_processor_amd_ryzen_7_7700","tests","Wed Aug 20 20:59:25 UTC 2025","passed","Wed Aug 20 21:00:06 UTC 2025","TestBuyProduct","test_buy","",""
+"test buy processor amd ryzen 7 7700","46259","test_buy_processor_amd_ryzen_7_7700","tests","Wed Aug 20 21:07:29 UTC 2025","passed","Wed Aug 20 21:08:15 UTC 2025","TestBuyProduct","test_buy","",""
