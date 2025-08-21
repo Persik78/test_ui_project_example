@@ -18,14 +18,26 @@ jobs:
           ref: gh-pages
           path: ./.github/gh-pages
 
-      - name: Install docker-compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: Run UI-tests via docker-compose
+      - name: Install Python dependencies
         run: |
-          docker-compose up --build --exit-code-from example_ui || true
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Allure CLI
+        run: |
+          curl -o allure-2.34.1.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.34.1/allure-commandline-2.34.1.tgz
+          sudo tar -zxvf allure-2.34.1.tgz -C /opt/
+          sudo ln -sf /opt/allure-2.34.1/bin/allure /usr/bin/allure
+          rm allure-2.34.1.tgz
+
+      - name: Run UI-tests
+        run: |
+          pytest -s -v tests/test_buy.py --alluredir=allure_results || true
 
 #      - name: Set up Python
 #        uses: actions/setup-python@v5
@@ -50,10 +62,10 @@ jobs:
 
       - name: Prepare allure-results dir
         run: mkdir -p allure-results/history
-
+        
       - name: Fix permissions for allure_results
         run: sudo chown -R $USER:$USER allure_results || true
-
+        
       - name: Copy history from gh-pages to allure_results
         run: |
           mkdir -p allure_results/history
