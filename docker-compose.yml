@@ -1,6 +1,5 @@
 services:
   example_ui:
-    image: python:3.13
     build:
       context: .
       dockerfile: Dockerfile
