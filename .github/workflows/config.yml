@@ -24,10 +24,14 @@ jobs:
           sudo tar -zxvf allure-2.34.1.tgz -C /opt/
           sudo ln -sf /opt/allure-2.34.1/bin/allure /usr/bin/allure
           rm allure-2.34.1.tgz
+      - name: Install docker-compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
 
       - name: Run UI-tests via docker-compose
         run: |
-          docker-compose up --build --exit-code-from example_ui || true
+          docker-compose up --build --exit-code-from example_ui
 
 #      - name: Set up Python
 #        uses: actions/setup-python@v5
