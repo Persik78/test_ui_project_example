@@ -1,9 +1,4 @@
-import time
 import allure
-import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
 from base.base_class import Base
 from menus.filters import Filters
 from pages.cart_page import CartPage
@@ -12,25 +7,20 @@ from menus.catalog_menu import CatalogMenu
 from pages.order_page import OrderPage
 from pages.products_page import ProductPage
 
-chrome_options = Options()
-chrome_options.binary_location = "/opt/chrome/chrome-linux64/chrome"
-chrome_options.add_argument("--headless=new")
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--disable-dev-shm-usage")
-service = Service("/opt/chromedriver/chromedriver-linux64/chromedriver")
-
 @allure.epic('Tests buy product')
 class TestBuyProduct():
 
     @allure.description('test buy processor amd ryzen 7 7700')
     def test_buy_processor_amd_ryzen_7_7700(self, set_up):
         driver = set_up
+
         main = MainPage(driver)
         main.open_main_page()
         main.click_catalog()
+
         catalog = CatalogMenu(driver)
         catalog.open_catalog_processor()
-        time.sleep(1) # Фильтры чем то перекрыты, не получалось через явное ожидание и обычный клик по чек боксу. У меня всегда успевали фильтры подгружаться, добавил на всякий случай
+
         filters = Filters(driver)
         filters.move_filters_menu()
         filters.select_brand_processor_amd()

@@ -32,7 +32,6 @@ class ProductPage(Base):
     add_cart_product_1 = product_1 + '/div[8]/div[3]/div/button'
 
 
-
     # Getters
     def get_main_word_page(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.main_word_page)))
@@ -52,9 +51,7 @@ class ProductPage(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.check_product_in_modal_window)))
 
 
-
     # Actions
-
     # Actions clicks
     def click_add_cart_product_1(self):
         self.get_add_cart_product_1().click()
@@ -62,6 +59,7 @@ class ProductPage(Base):
     def click_buton_close_modal_window(self):
         self.get_buton_close_modal_window().click()
         print('Click button close modal window before add cart')
+
 
     # Methods
     def select_add_cart_product_1(self):

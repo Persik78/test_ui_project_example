@@ -16,6 +16,7 @@ class MainPage(Base):
     cart = '(//div[@class="app-catalog-1ts79ul-Flex--StyledFlex eyflofv0"])[4]/span'
     catalog = '//a[@data-meta-name="DesktopHeaderFixed__catalog-menu"]'
 
+
     #Getters
     def get_cart(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart)))

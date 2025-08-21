@@ -14,12 +14,10 @@ class CartPage(Base):
 
 
     # Locators
-
     main_word_cart_page = '//div[@class="css-1l3z4gj-Flex--StyledFlex eyflofv0"]/span'
     button_back_main_menu = '//div[@class="css-1l3z4gj-Flex--StyledFlex eyflofv0"]/a/span'
     button_make_order = '//button[@class="e11203e30 css-fi4v85-Button--StyledButton-Button--Button ekx3zbi0"]'
     button_continue_guest = '//button[@class="e11203e30 css-10hmcp9-Button--StyledButton-Button--Button ekx3zbi0"]/span'
-
 
 
     # Getters
@@ -32,6 +30,7 @@ class CartPage(Base):
     def get_button_continue_guest(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.button_continue_guest)))
 
+
     # Actions
     def click_button_back_main_menu(self):
         self.get_button_back_main_menu().click()
@@ -42,6 +41,7 @@ class CartPage(Base):
     def click_button_continue_guest(self):
         self.get_button_continue_guest().click()
         print('Click button continue guest')
+
 
     # Methods
     def select_button_back_main_menu(self):

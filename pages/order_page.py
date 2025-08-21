@@ -20,13 +20,10 @@ class OrderPage(Base):
     pickup = '//div[@class="css-qdvesi e588gsg0"]/div/label[1]'
     delivery = '//div[@class="css-qdvesi e588gsg0"]/div/label[2]'
     email = '//input[@name="email"]'
-
     street = '//input[@name="street"]'
     add_street = '//div[@class="eqw7fo10 css-7asl3q-SelectListOption--StyledSelectListOption-SelectListOption--StyledSelectListOptionComponent e9d6jv80"]'
     building = '//input[@name="courier-delivery-new-address-form_house"]'
-
     place_an_order = '//button[@class="e1mb8yuw0 css-6wqf91-Button--StyledButton-Button--Button ekx3zbi0"]/span'
-
 
 
     # Getters
@@ -50,7 +47,6 @@ class OrderPage(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.building)))
     def get_place_an_order(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.place_an_order)))
-
 
 
     # Actions
@@ -86,9 +82,6 @@ class OrderPage(Base):
     def move_place_an_order(self):
         ActionChains(self.driver).move_to_element(self.get_place_an_order()).perform()
         print('Available place an order')
-
-
-
 
 
     # Methods
