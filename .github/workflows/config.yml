@@ -26,29 +26,29 @@ jobs:
           rm allure-2.34.1.tgz
 
 # Запуск с использованием docker-compose
-      - name: Install docker-compose
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
+      # - name: Install docker-compose
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y docker-compose
 
-      - name: Run UI-tests via docker-compose
-        run: |
-          docker-compose up --build --exit-code-from example_ui
+      # - name: Run UI-tests via docker-compose
+      #   run: |
+      #     docker-compose up --build --exit-code-from example_ui
 
 #Запуск на GitHub Actions Runner без docker-compose
-#      - name: Set up Python
-#        uses: actions/setup-python@v5
-#        with:
-#          python-version: "3.12"
-#
-#      - name: Install Python dependencies
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install -r requirements.txt
-#
-#      - name: Run UI-tests
-#        run: |
-#          pytest -s -v tests/test_buy.py --alluredir=allure_results || true
+     - name: Set up Python
+       uses: actions/setup-python@v5
+       with:
+         python-version: "3.12"
+
+     - name: Install Python dependencies
+       run: |
+         python -m pip install --upgrade pip
+         pip install -r requirements.txt
+
+     - name: Run UI-tests
+       run: |
+         pytest -s -v tests/test_buy.py --alluredir=allure_results || true
 
       - name: Prepare allure-results dir
         run: mkdir -p allure-results/history
